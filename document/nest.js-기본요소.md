@@ -78,6 +78,7 @@ export const getUsers = async (req, res) => {
   return users;
 };
 ```
+
 ---
 
 <br>
@@ -86,7 +87,7 @@ export const getUsers = async (req, res) => {
 
 <br>
 
-Nest CLI 모듈 생성 명령어: `nest g module [name]`
+Nest CLI 모듈 생성 명령어: `nest g module <name> [option]`
 
 <br>
 
@@ -107,8 +108,83 @@ Nest CLI 모듈 생성 명령어: `nest g module [name]`
 <br>
 
 ## Nest JS Controller<a id="4"></a>
+
+<br>
+
+Nest CLI 컨트롤러 생성 명령어: `nest g controller <name> [option]`
+<br> Option 예시: `--no-spec`, `--dry-run` 등
+
+<br>
+
+- **Controller**는 들어오는 요청을 받고 클라이언트에 응답을 반환하는 역할
+- `@Controller([경로])` 데코레이터로 클래스를 데코레이션하여 정의
+
+<br>
+
+**_Handler_**
+
+- 핸들러는 `@Get`, `@Post`, `@Delete` 등과 같은 데코레이터로 장식
+  된 컨트롤러 클래스 내의 단순한 메서드
+
 ---
 
 <br>
 
 ## Nest JS Service<a id="5"></a>
+
+<br>
+
+Nest CLI 서비스 생성 명령어: `nest g service <name> [option]`
+
+<br>
+
+- **Service**는 _데이터 처리_ 및 _비즈니스 로직 처리_ 담당
+  - 컨트롤러에서 데이터의 유효성 체크
+  - DB에 아이템을 생성
+  - 기타 다양한 처리
+- `@Injectable()` 데코레이터로 감싸져서 모듈에 제공
+  - 이 때, 서비스 인스턴스는 애플리케이션 전체에서 사용 가능
+
+<br>
+
+**_Provider_**
+
+- Provider는 종속성으로 주입하여 사용하는 개념
+  - Provider 패턴은 전역(루트)에 데이터를 넣고 빼와서 사용하는 객체
+- Nest 클래스(서비스, 리포지토리, 팩토리, 핼퍼 등)은 프로바이더로 취급
+- module 파일에서 Provider를 등록하여 사용
+  - Service 생성 시 module의 Provider에 Service 등록
+
+<br>
+
+**_Dependency Injection_**; 종속성 주입
+
+- Service를 Controller에서 이용할 수 있는 방법
+  - Controller에서 Service 모듈 **import**
+  - Controller 클래스의 **constructor에 주입**
+  - `this.xxxService.<method name>` 식으로 사용
+- Service에 정의한 메소드를 Controller에서 사용
+
+<br>
+
+**접근 제한자를 사용하여 소스 간단하게 하기**
+
+- **접근 제한자를 생성자 파라미터에 선언** 시 접근 제한자가 사용된 **생성자 파라미터는 암묵적으로 클래스 프로퍼티로 선언**
+
+```ts
+// 접근 제한자 없이 작성한 소스
+@Controller('boards')
+export class BoardsController {
+  boardsService: BoardsService;
+
+  constructor(boardsService: BoardsService) {
+    this.boardsService = boardsService;
+  }
+}
+
+// 접근 제한자로 간단히 작성
+@Controller('boards')
+export class BoardsController {
+  constructor(private boardsService: BoardsService) {}
+}
+```
