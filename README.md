@@ -14,7 +14,7 @@
 
 ## **Documents**
 
-[Nest.JS 기본요소]()
+[Nest.JS 기본요소](https://github.com/neungs-2/nestjs-board-app/blob/main/document/nest.js-%EA%B8%B0%EB%B3%B8%EC%9A%94%EC%86%8C.md)
 
 [CRUD 구현]()
 
@@ -41,7 +41,7 @@
 $ npm i -g @nestjs/cli
 
 # Nest.js 새로운 프로젝트 생성
-$ nest new [project-name]
+$ nest new <project-name> [option]
 
 # Example
 $ nest new nestjs-board-app
@@ -80,7 +80,7 @@ $ npm run test:cov
 ## **Generate**
 
 ```bash
-$ nest g [module/controller/service] [name] [option]
+$ nest g <module/controller/service> <name> [option]
 # nest: using nest cli
 # g: generate
 # module/controller/service: schematic that i want to create
