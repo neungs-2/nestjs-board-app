@@ -6,6 +6,8 @@
 - [Controller](#4)
 - [Service](#5)
 
+<br>
+
 ## Nest JS 기본 구조<a id="1"></a>
 
 - **eslintrc.js**
@@ -118,6 +120,7 @@ Nest CLI 컨트롤러 생성 명령어: `nest g controller <name> [option]`
 
 - **Controller**는 들어오는 요청을 받고 클라이언트에 응답을 반환하는 역할
 - `@Controller([경로])` 데코레이터로 클래스를 데코레이션하여 정의
+- **Service**에서 로직을 처리하고 **Controller**에서는 `Request`, `Response` 처리
 
 <br>
 
@@ -125,6 +128,12 @@ Nest CLI 컨트롤러 생성 명령어: `nest g controller <name> [option]`
 
 - 핸들러는 `@Get`, `@Post`, `@Delete` 등과 같은 데코레이터로 장식
   된 컨트롤러 클래스 내의 단순한 메서드
+- Client에서 보낸 값들을 Handler에서 받는 법
+  - `app.post('/', (res, req) => {})`
+  - **Express**에서는 bodyParser를 이요하여 res.body 식으로 받아왔음
+  - Nest에서는
+
+<br>
 
 ---
 
