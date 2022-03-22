@@ -5,6 +5,7 @@
 - [Module](#3)
 - [Controller](#4)
 - [Service](#5)
+- [DTO](#6)
 
 <br>
 
@@ -129,9 +130,23 @@ Nest CLI 컨트롤러 생성 명령어: `nest g controller <name> [option]`
 - 핸들러는 `@Get`, `@Post`, `@Delete` 등과 같은 데코레이터로 장식
   된 컨트롤러 클래스 내의 단순한 메서드
 - Client에서 보낸 값들을 Handler에서 받는 법
-  - `app.post('/', (res, req) => {})`
-  - **Express**에서는 bodyParser를 이요하여 res.body 식으로 받아왔음
-  - Nest에서는
+
+  - **Express.js**
+    - `app.post('/', (res, req) => { console.log(req.body) })`
+    - **Express**에서는 bodyParser를 이용하여 req.body 식으로 받아왔음
+  - **Nest.js**
+
+    - **Nest**에서는 `@Body() body`를 이용해서 가져옴
+    - 전체 Body가 아닌 개별 요소를 받으려면 `@Body('title') title: string` 처럼 괄호 안에 명시
+      <br>
+
+      ```ts
+        @Post()
+        createBoard(@Body() body, @Body('title') title: string): Board {
+          console.log('body', body);
+          console.log('title', title);
+        }
+      ```
 
 <br>
 
@@ -197,3 +212,21 @@ export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 }
 ```
+
+---
+
+<br>
+
+## Data Transfer Object(DTO)<a id="6"></a>
+
+- **계층간 데이터 교환**을 위한 객체
+- **DB에서 데이터**를 얻어 **Service나 Controller 등으로 보낼 때 사용**하는 객체
+- 데이터가 **네트워크를 통해 전송되는 방법을 정의**하는 객체
+- interface나 class를 이용해서 정의 (Nest에서는 **Class** 추천)
+  - **Class**는 ES6 표준의 일부로 컴파일된 JS에서 실제 엔티티로 유지
+  - **Interface**는 TS의 일부로 트랜스 파일 중에 제거되어 Nest에서 참조 불가
+  - 파이프 같은 기능을 런타임에서 사용할 수 있으므로 런타임 시 사용가능한 **Class 추천**
+- **DTO 사용 이유**
+  - 효율적인 데이터 유효성 체크
+  - 코드를 더 안정적으로 만들어 줌
+  - Typescript의 타입으로도 사용됨
