@@ -8,6 +8,7 @@ import { CreateBoardDto } from './dto/create-board.dto';
 // 이때 전체를 가져오려면 괄호를 공백으로
 // 특정 element를 가져오려면 괄호 안에 element 요소를 써줌
 // 받아온 요소를 뒤의 변수에 넣어줌
+// 테스트를 위한 수정
 
 @Controller('boards')
 export class BoardsController {
