@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Board, BoardStatus } from './board.model';
 import { v1 as uuid } from 'uuid';
+import { CreateBoardDto } from './dto/create-board.dto';
 
 @Injectable()
 export class BoardsService {
@@ -11,7 +12,8 @@ export class BoardsService {
   }
 
   // Tip: Unique ID 줄때, MongoDB 등에서 알아서 지정해주지만 일단은 uuid 모듈 사용
-  createBoard(title: string, description: string) {
+  createBoard(createBoardDto: CreateBoardDto) {
+    const { title, description } = createBoardDto;
     const board: Board = {
       id: uuid(),
       title,
