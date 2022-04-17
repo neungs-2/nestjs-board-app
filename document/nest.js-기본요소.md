@@ -329,3 +329,28 @@ bootstrap();
   - ParseArrayPipe
   - ParseUUIDPipe
   - DefaultValuePipe
+
+<br>
+
+### **Custom Pipes 사용 방법**
+
+- `PipeTransform`을 커스텀 파이프에 **implements** 해줌
+- argument를 처리하기 위한 `transform()` 메서드를 생성
+
+```ts
+export class BoardStatusValidationPipe implements PipeTransform {
+  transform(value: any, metadata: ArgumentMetadata) {
+    console.log('value', value);
+    console.log('metadata', metadata);
+
+    return value;
+  }
+}
+```
+
+**_transform() 메서드_**
+
+- Param 1: 처리가 된 인자의 값(value)
+- Param 2: 인자에 대한 메타데이터를 포함한 객체
+- 리턴된 값은 Route 핸들러로 전해짐
+- Exception 발생 시 클라이언트에 바로 전해짐
