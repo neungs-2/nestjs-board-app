@@ -6,6 +6,7 @@
 - [Controller](#4)
 - [Service](#5)
 - [DTO](#6)
+- [Nest JS Pipe](#7)
 
 <br>
 
@@ -229,4 +230,89 @@ export class BoardsController {
 - **DTO 사용 이유**
   - 효율적인 데이터 유효성 체크
   - 코드를 더 안정적으로 만들어 줌
-  - Typescript의 타입으로도 사용됨
+  - **Typescript의 타입**으로도 사용됨
+
+---
+
+<br>
+
+## Nest JS Pipe<a id="7"></a>
+
+- 파이프는 @Injectable() 데코레이터로 주석이 달린 클래스
+- **data transformation**과 **data validation**을 위해 사용
+- 컨트롤러 경로 처리기(Router Handler)에 의해 처리되는 인수에 대해 작동
+- Nest는 메소드 호출 직전 파이프 삽입, 파이프는 메소드를 향하는 인수를 수신하고 작동
+
+<br>
+
+***Data Transformation***
+- 입력 데이터를 원하는 형식으로 변환
+- ex) 숫자를 받고 싶은데 문자열 형식 데이터 입력 시 파이프에서 숫자로 자동 변환
+
+<br>
+
+***Data Validation***
+- 입력 데이터를 평가하고 유효한 경우 그대로 전달, 유효하지 않은 경우 예외 발생
+- ex) 입력 데이터 크기가 10글자 이하여야 하는데 초과 시 에러 발생
+
+<br>
+
+### **Pipe 사용법(Binding Pipes)**
+- *핸들러 레벨*, *파라미터 레벨*, *글로벌 레벨* 3가지로 Binding 방법이 나눠짐
+
+<br>
+
+***Handler-level Pipes***
+- 핸들러 레벨에서 `@UsePipes()` 데코레이터를 이용
+- 핸들러 내부 모든 파라미터(title, description)에 파이프 적용
+```ts
+@Post()
+@UsePipes(pipe)
+createBoard(
+  @Body('title') title,
+  @Body('description') description
+) {
+  // ...
+}
+```
+
+<br>
+
+***Parameter-level Pipes***
+- 파라미터 레벨의 파이프로 특정 파라미터에만 적용
+- 아래의 경우 title만 파라미터 파이프가 적용
+```ts
+@Post()
+createBoard(
+  @Body('title', ParameterPipe) title,
+  @Body('description') description
+) {
+  // ...
+}
+```
+
+<br>
+
+***Global-level Pipes***
+- 애플리케이션 레벨의 파이프로 클라이언트에서 들어오는 모든 요청에 적용
+- `app.useGlobalPipes(GlobalPipes)`식으로 사용
+- 가장 상단 영역인 **main.ts**에 위치
+```ts
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(GlobalPipes);
+  await app.listen(3000);
+}
+bootstrap();
+```
+
+<br>
+
+### **Built-in Pipes**
+- Nest JS에서 기본적으로 만들어놓은 6가지의 파이프
+  - ValidationPipe
+  - ParseIntPipe
+  - ParseBoolPipe
+  - ParseArrayPipe
+  - ParseUUIDPipe
+  - DefaultValuePipe
