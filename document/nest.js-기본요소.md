@@ -237,6 +237,7 @@ export class BoardsController {
 <br>
 
 ## Nest JS Pipe<a id="7"></a>
+<img width="999" alt="image" src="https://user-images.githubusercontent.com/60606025/163707676-1a7076ae-622b-4f72-a09c-56ae19d7ce66.png">
 
 - 파이프는 @Injectable() 데코레이터로 주석이 달린 클래스
 - **data transformation**과 **data validation**을 위해 사용
