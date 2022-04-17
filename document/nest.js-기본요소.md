@@ -237,6 +237,7 @@ export class BoardsController {
 <br>
 
 ## Nest JS Pipe<a id="7"></a>
+
 <img width="999" alt="image" src="https://user-images.githubusercontent.com/60606025/163707676-1a7076ae-622b-4f72-a09c-56ae19d7ce66.png">
 
 - 파이프는 @Injectable() 데코레이터로 주석이 달린 클래스
@@ -246,26 +247,32 @@ export class BoardsController {
 
 <br>
 
-***Data Transformation***
+**_Data Transformation_**
+
 - 입력 데이터를 원하는 형식으로 변환
 - ex) 숫자를 받고 싶은데 문자열 형식 데이터 입력 시 파이프에서 숫자로 자동 변환
 
 <br>
 
-***Data Validation***
+**_Data Validation_**
+
 - 입력 데이터를 평가하고 유효한 경우 그대로 전달, 유효하지 않은 경우 예외 발생
 - ex) 입력 데이터 크기가 10글자 이하여야 하는데 초과 시 에러 발생
 
 <br>
 
 ### **Pipe 사용법(Binding Pipes)**
-- *핸들러 레벨*, *파라미터 레벨*, *글로벌 레벨* 3가지로 Binding 방법이 나눠짐
+
+- `DTO`와 `Controller`에 데코레이터를 추가
+- _핸들러 레벨_, _파라미터 레벨_, _글로벌 레벨_ 3가지로 Binding 방법이 나눠짐
 
 <br>
 
-***Handler-level Pipes***
+**_Handler-level Pipes_**
+
 - 핸들러 레벨에서 `@UsePipes()` 데코레이터를 이용
 - 핸들러 내부 모든 파라미터(title, description)에 파이프 적용
+
 ```ts
 @Post()
 @UsePipes(pipe)
@@ -279,9 +286,11 @@ createBoard(
 
 <br>
 
-***Parameter-level Pipes***
+**_Parameter-level Pipes_**
+
 - 파라미터 레벨의 파이프로 특정 파라미터에만 적용
 - 아래의 경우 title만 파라미터 파이프가 적용
+
 ```ts
 @Post()
 createBoard(
@@ -294,10 +303,12 @@ createBoard(
 
 <br>
 
-***Global-level Pipes***
+**_Global-level Pipes_**
+
 - 애플리케이션 레벨의 파이프로 클라이언트에서 들어오는 모든 요청에 적용
 - `app.useGlobalPipes(GlobalPipes)`식으로 사용
 - 가장 상단 영역인 **main.ts**에 위치
+
 ```ts
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -310,6 +321,7 @@ bootstrap();
 <br>
 
 ### **Built-in Pipes**
+
 - Nest JS에서 기본적으로 만들어놓은 6가지의 파이프
   - ValidationPipe
   - ParseIntPipe
