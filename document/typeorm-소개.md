@@ -19,5 +19,21 @@
 ```js
 const boards = board.find({title: 'Hello', status: 'PUBLIC'});
 
-db.query(SELECT * FROM boards WHERE title = "Hello" AND status = "PUBLIC", (err, res))
+db.query(SELECT * FROM boards WHERE title = "Hello" AND status = "PUBLIC",
+  (err, res) => {
+    if (err) {
+      throw new Error('Error');
+    }
+    boards = result.rows;
+  }
+);
 ```
+
+<br>
+
+## **TypeORM 특징과 이점**
+
+- 모델을 기반으로 데이터베이스 테이블 체계를 자동으로 생성
+- 데이터베이스에서 개체를 쉽게 삽입, 업데이트 및 삭제 가능
+- 테이블 간 매핑 (1:1, 1:N, M:N)
+- 간단한 CLI 명령 제공
