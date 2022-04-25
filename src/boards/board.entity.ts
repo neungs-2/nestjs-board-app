@@ -1,3 +1,4 @@
+// Entity는 DB 테이블에 매핑
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { BoardStatus } from './board.model';
 
