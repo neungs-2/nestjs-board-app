@@ -23,10 +23,16 @@ import { CreateBoardDto } from './dto/create-board.dto';
 //    받아온 요소를 뒤의 변수에 넣어줌
 // - Delete에서 return하는 것 없이 단순히 삭제만 한다면
 //    Service는 void이고 Controller도 Service 실행만 하고 void
+// - Memory DB에서 Postgres로 변경하면서 return type이 Promise로 바뀌었음
 
 @Controller('boards')
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
+
+  @Get()
+  getAllBoards(): Promise<Board[]> {
+    return this.boardsService.getAllBoards();
+  }
 
   @Get('/:id')
   getBoardById(@Param('id') id: number): Promise<Board> {
