@@ -12,19 +12,19 @@
 
 <br>
 
-## **Documents**
+## **Index and Documents**
 
 [Nest.JS 기본요소](https://github.com/neungs-2/nestjs-board-app/blob/main/document/nest.js-%EA%B8%B0%EB%B3%B8%EC%9A%94%EC%86%8C.md)
 
-[CRUD 구현]()
+CRUD 구현<br>
 
-[Pipe 이용]()
+Pipe 이용<br>
 
-[Postgres & TypeORM 연동]()
+[Postgres & TypeORM 연동](https://github.com/neungs-2/nestjs-board-app/blob/main/document/typeorm-%EC%86%8C%EA%B0%9C.md)<br>
 
-[데이터베이스를 이용한 CRUD 구현]()
+데이터베이스를 이용한 CRUD 구현<br>
 
-[인증기능 구현하기]()
+[인증기능 구현하기](https://github.com/neungs-2/nestjs-board-app/blob/main/document/passport-jwt.md)<br>
 
 [게시물에 접근하는 권한 처리]()
 
