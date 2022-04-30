@@ -1,5 +1,19 @@
 # Passport and Jwt
 
+## **Jwt 및 Passport 관련 모듈 설치**
+
+- `npm install @nestjs/jwt @nestjs/passport @types/passport-jwt passport passport-jwt --save`
+
+<br>
+
+## **Passport JS**
+
+- Node.js에서 Authenticate를 적용할 때에, 편하게 사용할 수 있는 미들웨어
+- 다양한 Strategy를 가지며 JWT도 적용 가능
+  - signature의 유효성 확인 후 유저이름을 DB에서 찾아서 인증하는 과정을 적용해줌
+
+<br>
+
 ## **JWT (Json Web Token)**
 
 - 정보를 JSON 개체로 안전하게 전송하기 위한 개방형 표준 (RFC 7519)
@@ -65,3 +79,9 @@
 - **토큰 길이**: 정보가 많아질수록 토큰의 길이가 늘어나 네트워크 부하를 줄 수 있음
 - **Stateless**: JWT는 상태를 저장하지 않아서 생성 후 제어가 불가하기 때문에 꼭 토큰 만료 시간을 설정
 - **Tore Token**: 토큰은 클라이언트 측에서 관리하므로 토큰을 저장해야 함
+
+<br>
+
+## **JWT 인증 과정**
+
+<img width="1080" alt="image" src="https://user-images.githubusercontent.com/60606025/166112340-761e98ce-67f5-4605-b76b-60e006712100.png">
