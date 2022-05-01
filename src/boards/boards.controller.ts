@@ -39,6 +39,13 @@ export class BoardsController {
     return this.boardsService.getAllBoards();
   }
 
+  // getAllBoards는 로그인 정보에 상관없이 모든 Board 조회
+  // getLoginUserBoards는 로그인한 유저가 작성한 모든 Board 조회
+  @Get('/login-user')
+  getLoginUserBoards(@GetUser() user: User): Promise<Board[]> {
+    return this.boardsService.getLoginUserBoards(user);
+  }
+
   @Get('/:id')
   getBoardById(@Param('id') id: number): Promise<Board> {
     return this.boardsService.getBoardById(id);
