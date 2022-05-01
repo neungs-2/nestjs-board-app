@@ -7,9 +7,11 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { BoardStatusValidationPipe } from '../pipes/board-status-validation.pipe';
 import { BoardStatus } from './board-status.enum';
 import { Board } from './board.entity';
@@ -26,6 +28,7 @@ import { CreateBoardDto } from './dto/create-board.dto';
 // - Memory DB에서 Postgres로 변경하면서 return type이 Promise로 바뀌었음
 
 @Controller('boards')
+@UseGuards(AuthGuard()) // controller level에서 Guard 걸어주기 (인증된 유저만 이용 가능)
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
 
