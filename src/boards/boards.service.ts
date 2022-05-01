@@ -59,6 +59,15 @@ export class BoardsService {
 
     return board;
   }
+
+  async deleteLoginUserBoard(id: number, user: User): Promise<void> {
+    const result = await this.boardRepository.delete({ id, user });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Can't find Board with id ${id}`);
+    }
+  }
+
+  // NOTE: 주석처리 된 코드는 메모리 DB 사용(단순 array에 data 저장) 시 사용했던 코드
   //   private boards: Board[] = [];
 
   //   getAllBoards(): Board[] {

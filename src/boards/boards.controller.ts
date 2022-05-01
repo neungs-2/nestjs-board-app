@@ -70,6 +70,11 @@ export class BoardsController {
   ): Promise<Board> {
     return this.boardsService.updateBoardStatus(id, status);
   }
+
+  @Delete('/:id')
+  deleteLoginUserBoard(@Param('id', ParseIntPipe) id: number, @GetUser() user: User): Promise<void> {
+    return this.boardsService.deleteLoginUserBoard(id, user);
+  }
   //   @Get('/')
   //   getAllBoards(): Board[] {
   //     return this.boardsService.getAllBoards();
