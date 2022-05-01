@@ -2,6 +2,8 @@ import { Body, Controller, Post, Req, UseGuards, ValidationPipe } from '@nestjs/
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { GetUser } from './get-user.decorator';
+import { User } from './user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -26,10 +28,15 @@ export class AuthController {
 
   // MEMO: 요청 안에 유저 정보(유저 객체)가 들어가게 하는 방법
   // UseGuards 안에 @nestjs/passport에서 가져온 AuthGuard()를 사용하여 넣어줌
-  // Guard는 인증을 위한 미들웨어!
+  // Guard는 인증을 위한 미들웨어! => API test 시 auth (Bearer)에 토큰값 넣어줘야 함
   @Post('/authTest')
   @UseGuards(AuthGuard())
-  authTest(@Req() req) {
-    console.log('req', req);
+  // authTest(@Req() req) {
+  //   console.log('user', req.user);
+  // }
+
+  // Custom Decorator를 사용하여 req.user를 안써도 user 정보만 가져오게 함
+  authTest(@GetUser() user: User) {
+    console.log('user', user);
   }
 }
