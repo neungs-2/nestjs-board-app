@@ -26,9 +26,9 @@ Pipe 이용<br>
 
 [인증기능 구현하기](https://github.com/neungs-2/nestjs-board-app/blob/main/document/passport-jwt.md)<br>
 
-[게시물에 접근하는 권한 처리]()
+게시물에 접근하는 권한 처리<br>
 
-[로그 남기기]()
+[로그 남기기](https://github.com/neungs-2/nestjs-board-app/blob/main/document/log-%EA%B0%9C%EC%9A%94.md)<br>
 
 [설정 및 마무리]()
 
