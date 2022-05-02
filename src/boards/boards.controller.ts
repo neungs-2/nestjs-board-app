@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   ParseIntPipe,
   Patch,
@@ -32,6 +33,7 @@ import { CreateBoardDto } from './dto/create-board.dto';
 @Controller('boards')
 @UseGuards(AuthGuard()) // controller level에서 Guard 걸어주기 (인증된 유저만 이용 가능)
 export class BoardsController {
+  private logger = new Logger('BoardsController');
   constructor(private boardsService: BoardsService) {}
 
   @Get()
@@ -43,6 +45,7 @@ export class BoardsController {
   // getLoginUserBoards는 로그인한 유저가 작성한 모든 Board 조회
   @Get('/login-user')
   getLoginUserBoards(@GetUser() user: User): Promise<Board[]> {
+    this.logger.verbose(`User ${user.username} trying to get all boards.`);
     return this.boardsService.getLoginUserBoards(user);
   }
 
@@ -54,6 +57,8 @@ export class BoardsController {
   @Post()
   @UsePipes(ValidationPipe)
   createBoard(@Body() createBoardDto: CreateBoardDto, @GetUser() user: User): Promise<Board> {
+    // console에 [object Object] 식으로 찍히면 JSON.stringify로 변환시켜줘야 함.
+    this.logger.verbose(`User ${user.username} creating a new board. Payload: ${JSON.stringify(createBoardDto)}`);
     return this.boardsService.createBoard(createBoardDto, user);
   }
 
